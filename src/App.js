@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -23,7 +23,6 @@ import "./App.css";
 import GeoData from "./JSON/Talhao.json";
 
 function App() {
-  const map = useMap();
   const [lntlng, setLntLng] = useState([
     -15.179037392360357, -53.58474565423604,
   ]);
@@ -34,9 +33,29 @@ function App() {
 
   // ---------------------------------------------
 
-  // function returnLocationMarker() {
-  //   return null;
-  // }
+  function BootstrapButton() {
+    const map = useMap();
+
+    if (!map) return;
+    const buttonControl = L.control({
+      position: "bottomright",
+    });
+
+    buttonControl.onAdd = function (map) {
+      this._div = L.DomUtil.create("div", "myControl");
+
+      const buttonElement = `<div >
+      <button>Adicionar novo ponto</button>
+      </div>`;
+
+      this._div.innerHTML = buttonElement;
+      return this._div;
+    };
+
+    buttonControl.addTo(map);
+
+    return null;
+  }
 
   function MyComponent() {
     const map = useMapEvents({
@@ -44,6 +63,8 @@ function App() {
         const { lat, lng } = e.latlng;
         console.log("Longitude => ", lng);
         console.log("Latitude => ", lat);
+        console.log("evento => ", e);
+        L.marker(firstPosition).addTo(map);
       },
     });
     return null;
@@ -80,7 +101,8 @@ function App() {
             </Popup>
           </Marker>
           <GeoJSON key="my-geojson" data={GeoData} />
-          {/* <MyComponent /> */}
+          <MyComponent />
+          <BootstrapButton />
         </MapContainer>
       </Box>
       {/* <div style={{ backgroundColor: "green" }}>
