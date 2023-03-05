@@ -31,9 +31,7 @@ function App() {
 
   // ---------------------------------------------
 
-  // ---------------------------------------------
-
-  function BootstrapButton() {
+  function MyCustomButtom() {
     const map = useMap();
 
     if (!map) return;
@@ -102,7 +100,7 @@ function App() {
           </Marker>
           <GeoJSON key="my-geojson" data={GeoData} />
           <MyComponent />
-          <BootstrapButton />
+          <MyCustomButtom />
         </MapContainer>
       </Box>
       {/* <div style={{ backgroundColor: "green" }}>
