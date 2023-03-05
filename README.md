@@ -26,7 +26,7 @@ Checkplant - Teste Front-End
 
 - [x] Os dados(pontos) podem existir só em memória, ou seja não precisam necessariamente ser salvos ou enviados para uma API.
 
-- [] A aplicação deve conter todas as funcionalidades(User Stories) e o visual do protótipo.
+- [ ] A aplicação deve conter todas as funcionalidades(User Stories) e o visual do protótipo.
 
 ## User Stories
 
