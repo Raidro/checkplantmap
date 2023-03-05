@@ -1,8 +1,4 @@
-# checkplantmap
-
-Checkplant - Teste Front-End
-
-### Checkplant - Teste Front-End
+# Checkplant - Teste Front-End
 
 ## Como Iniciar a aplicação
 
