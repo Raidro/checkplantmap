@@ -1,33 +1,29 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import {
   MapContainer,
   useMapEvents,
   TileLayer,
-  Popup,
   Marker,
   useMap,
 } from "react-leaflet";
-import { GeoJSON } from "react-leaflet";
-
 // usado pra executar as funções do leaflet
 import L from "leaflet";
 
-import "./App.css";
-
+// geoJson de coordenadas
+import { GeoJSON } from "react-leaflet";
 import GeoData from "./JSON/Talhao.json";
 
-function App() {
-  const [lntlng, setLntLng] = useState([
-    -15.179037392360357, -53.58474565423604,
-  ]);
+import "./App.css";
 
-  const firstPosition = [-15.17602065560767, -53.579893112182624];
+function App() {
+  const [lntlng] = useState([-15.179037392360357, -53.58474565423604]);
+
+  const anotherPin = [-15.17602065560767, -53.579893112182624];
 
   // ---------------------------------------------
 
@@ -58,11 +54,7 @@ function App() {
   function MyComponent() {
     const map = useMapEvents({
       click: (e) => {
-        const { lat, lng } = e.latlng;
-        console.log("Longitude => ", lng);
-        console.log("Latitude => ", lat);
-        console.log("evento => ", e);
-        L.marker(firstPosition).addTo(map);
+        L.marker(anotherPin).addTo(map);
       },
     });
     return null;
@@ -93,21 +85,12 @@ function App() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker draggable position={lntlng}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
+          <Marker draggable position={lntlng}></Marker>
           <GeoJSON key="my-geojson" data={GeoData} />
           <MyComponent />
           <MyCustomButtom />
         </MapContainer>
       </Box>
-      {/* <div style={{ backgroundColor: "green" }}>
-        <Button onClick={() => returnLocationMarker()} variant="contained">
-          Adicionar novo
-        </Button>
-      </div> */}
     </>
   );
 }
