@@ -14,7 +14,7 @@ Checkplant - Teste Front-End
 
 4. Ao final do projeto, execute o comando: `npm start`
 
-5. espero o projeto ser aberto no navegador (caso não tenha um navegador padrão ou goste de um como opera, firefox... você pode acessar o projeto pela seguinte url): `localhost/3000`
+5. espero o projeto ser aberto no navegador (caso não tenha um navegador padrão ou goste de um como opera, firefox... você pode acessar o projeto pela seguinte url): `localhost:3000`
 
 ## Requisitos
 
