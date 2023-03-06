@@ -10,6 +10,7 @@ import {
   TileLayer,
   Marker,
   useMap,
+  Popup,
 } from "react-leaflet";
 // usado pra executar as funções do leaflet
 import L from "leaflet";
@@ -20,13 +21,22 @@ import GeoData from "./JSON/Talhao.json";
 
 import "./App.css";
 
+import Pin from "./Utils/images/Regular=on, Move=off.svg";
+
 function App() {
   const [lntlng] = useState([-15.179037392360357, -53.58474565423604]);
-
   const anotherPin = [-15.17602065560767, -53.579893112182624];
 
   // ---------------------------------------------
 
+  var customPin = L.icon({
+    iconUrl: Pin,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [2, -22],
+  });
+
+  // ---------------------------------------------
   function MyCustomButtom() {
     const map = useMap();
 
@@ -54,7 +64,7 @@ function App() {
   function MyComponent() {
     const map = useMapEvents({
       click: (e) => {
-        L.marker(anotherPin).addTo(map);
+        L.marker(anotherPin, { icon: customPin, draggable: true }).addTo(map);
       },
     });
     return null;
@@ -85,7 +95,7 @@ function App() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker draggable position={lntlng}></Marker>
+          <Marker draggable position={lntlng} icon={customPin}></Marker>
           <GeoJSON key="my-geojson" data={GeoData} />
           <MyComponent />
           <MyCustomButtom />
