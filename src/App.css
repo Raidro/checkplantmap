@@ -1,0 +1,13 @@
+.buttonDelete {
+  border-radius: 5px;
+  background-color: red;
+  border-color: red;
+  color: white;
+}
+
+.buttonAdd {
+  border-radius: 5px;
+  background-color: white;
+  border-color: white;
+  color: black;
+}

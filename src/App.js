@@ -23,6 +23,7 @@ import "./App.css";
 import PinMoveOff from "./Utils/images/Regular=on, Move=off.svg";
 import PinMoveOn from "./Utils/images/Regular=off, Move=on.svg";
 import ButtonPin from "./Utils/images/Pin.svg";
+import TrashIcon from "./Utils/images/Trash.svg";
 
 const custonPinMoveOff = L.icon({
   iconUrl: PinMoveOff,
@@ -44,29 +45,52 @@ function App() {
 
   const [customPin, setCustomPin] = useState(custonPinMoveOff);
 
-  function MyCustomButtom() {
+  function AddButton() {
     const map = useMap();
 
-    if (!map) return;
-    const buttonControl = L.control({
-      position: "bottomright",
-    });
+    if (map) {
+      const buttonControl = L.control({
+        position: "bottomright",
+      });
 
-    buttonControl.onAdd = function (map) {
-      this._div = L.DomUtil.create("div", "myControl");
+      buttonControl.onAdd = function (map) {
+        this._div = L.DomUtil.create("div", "myControl");
 
-      const buttonElement = `<div >
-      <button type="button">Adicionar novo <img src=${ButtonPin} /> </button>
-      
-      </div>`;
+        const buttonElement = `<div >
+        <button type="button"  class="buttonAdd">Adicionar novo <img src=${ButtonPin} /> </button>
+        </div>`;
 
-      this._div.innerHTML = buttonElement;
-      return this._div;
-    };
+        this._div.innerHTML = buttonElement;
+        return this._div;
+      };
 
-    buttonControl.addTo(map);
+      buttonControl.addTo(map);
+    } else {
+      return null;
+    }
+  }
 
-    return null;
+  function DeleteButton() {
+    const map = useMap();
+
+    if (map) {
+      const buttonControl = L.control({
+        position: "bottomright",
+      });
+
+      buttonControl.onAdd = function (map) {
+        this._div = L.DomUtil.create("div", "myControl");
+        const buttonElement = `<div >
+        <button type="button" class="buttonDelete">Deletar todos <img src=${TrashIcon} /> </button>
+        </div>`;
+        this._div.innerHTML = buttonElement;
+        return this._div;
+      };
+
+      buttonControl.addTo(map);
+    } else {
+      return null;
+    }
   }
 
   function MyComponent() {
@@ -126,7 +150,8 @@ function App() {
           ></Marker>
           <GeoJSON key="my-geojson" data={GeoData} />
           <MyComponent />
-          <MyCustomButtom />
+          <DeleteButton />
+          <AddButton />
         </MapContainer>
       </Box>
     </>
