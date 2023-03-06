@@ -23,29 +23,26 @@ import "./App.css";
 import PinMoveOff from "./Utils/images/Regular=on, Move=off.svg";
 import PinMoveOn from "./Utils/images/Regular=off, Move=on.svg";
 
+const custonPinMoveOff = L.icon({
+  iconUrl: PinMoveOff,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [2, -22],
+});
+
+const customPinMoveOn = L.icon({
+  iconUrl: PinMoveOn,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [2, -22],
+});
+
 function App() {
   const [lntlng] = useState([-15.179037392360357, -53.58474565423604]);
   const anotherPin = [-15.17602065560767, -53.579893112182624];
 
-  const custonPinMoveOff = L.icon({
-    iconUrl: PinMoveOff,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [2, -22],
-  });
-
-  const customPinMoveOn = L.icon({
-    iconUrl: PinMoveOn,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [2, -22],
-  });
-
   const [customPin, setCustomPin] = useState(custonPinMoveOff);
 
-  // ---------------------------------------------
-
-  // ---------------------------------------------
   function MyCustomButtom() {
     const map = useMap();
 
