@@ -22,6 +22,7 @@ import "./App.css";
 
 import PinMoveOff from "./Utils/images/Regular=on, Move=off.svg";
 import PinMoveOn from "./Utils/images/Regular=off, Move=on.svg";
+import ButtonPin from "./Utils/images/Pin.svg";
 
 const custonPinMoveOff = L.icon({
   iconUrl: PinMoveOff,
@@ -55,7 +56,8 @@ function App() {
       this._div = L.DomUtil.create("div", "myControl");
 
       const buttonElement = `<div >
-      <button>Adicionar novo ponto</button>
+      <button type="button">Adicionar novo <img src=${ButtonPin} /> </button>
+      
       </div>`;
 
       this._div.innerHTML = buttonElement;
