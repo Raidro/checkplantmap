@@ -10,7 +10,6 @@ import {
   TileLayer,
   Marker,
   useMap,
-  Popup,
 } from "react-leaflet";
 // usado pra executar as funções do leaflet
 import L from "leaflet";
@@ -21,20 +20,30 @@ import GeoData from "./JSON/Talhao.json";
 
 import "./App.css";
 
-import Pin from "./Utils/images/Regular=on, Move=off.svg";
+import PinMoveOff from "./Utils/images/Regular=on, Move=off.svg";
+import PinMoveOn from "./Utils/images/Regular=off, Move=on.svg";
 
 function App() {
   const [lntlng] = useState([-15.179037392360357, -53.58474565423604]);
   const anotherPin = [-15.17602065560767, -53.579893112182624];
 
-  // ---------------------------------------------
-
-  var customPin = L.icon({
-    iconUrl: Pin,
+  const custonPinMoveOff = L.icon({
+    iconUrl: PinMoveOff,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [2, -22],
   });
+
+  const customPinMoveOn = L.icon({
+    iconUrl: PinMoveOn,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [2, -22],
+  });
+
+  const [customPin, setCustomPin] = useState(custonPinMoveOff);
+
+  // ---------------------------------------------
 
   // ---------------------------------------------
   function MyCustomButtom() {
@@ -64,10 +73,17 @@ function App() {
   function MyComponent() {
     const map = useMapEvents({
       click: (e) => {
-        L.marker(anotherPin, { icon: customPin, draggable: true }).addTo(map);
+        L.marker(anotherPin, {
+          icon: customPin,
+          draggable: true,
+        }).addTo(map);
       },
     });
     return null;
+  }
+
+  function changeIcon() {
+    setCustomPin(customPinMoveOn);
   }
 
   return (
@@ -95,7 +111,14 @@ function App() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker draggable position={lntlng} icon={customPin}></Marker>
+          <Marker
+            draggable
+            position={lntlng}
+            icon={customPin}
+            eventHandlers={{
+              click: () => changeIcon(),
+            }}
+          ></Marker>
           <GeoJSON key="my-geojson" data={GeoData} />
           <MyComponent />
           <MyCustomButtom />
